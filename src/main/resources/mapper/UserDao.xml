@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 设置为IUserDao接口方法提供sql语句配置 -->
+<mapper namespace="com.myProject.dao.IUserDao">
+
+    <resultMap type="com.myProject.model.User" id="LoginMap">
+        <id column="username" property="username" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <result column="userid" property="userid" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="selectByName" parameterType="java.lang.String" resultMap="LoginMap">
+        select * from user where username = #{username}
+    </select>
+
+</mapper>

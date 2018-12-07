@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 设置为IUserDao接口方法提供sql语句配置 -->
+<mapper namespace="com.myProject.dao.IProjecttwoDao">
+    <select id="selectProjecttwos" resultType="com.myProject.model.projecttwo" parameterType="java.lang.String">
+        SELECT * FROM projecttwo WHERE projectid = #{projectid}
+    </select>
+
+    <delete id="deleteProjecttwo" parameterType="java.lang.String">
+        delete from projecttwo where projectid = #{projectid}
+    </delete>
+
+    <insert id="addProjecttwolist"  useGeneratedKeys="true" parameterType="java.util.List">
+        insert into projecttwo (projectid,twoid,twoname,twof,juanname)
+        values
+        <foreach collection="list" item="item" index="index" separator="," close=";">
+            (#{item.projectid,jdbcType=VARCHAR},#{item.twoid,jdbcType=VARCHAR},#{item.twoname,jdbcType=VARCHAR},#{item.twof,jdbcType=VARCHAR},#{item.juanname,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+</mapper>

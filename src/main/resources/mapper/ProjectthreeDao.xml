@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 设置为IUserDao接口方法提供sql语句配置 -->
+<mapper namespace="com.myProject.dao.IProjectthreeDao">
+    <select id="selectProjectthree" resultType="com.myProject.model.projectthree" parameterType="java.lang.String">
+        SELECT * FROM projectthree WHERE twoid = #{projecttwoid}
+    </select>
+
+    <select id="sProjectthree" resultType="com.myProject.model.projectthree" parameterType="java.lang.String">
+        SELECT * FROM projectthree WHERE threeid = #{threeid}
+    </select>
+
+    <delete id="deleteProjectthrees" parameterType="java.lang.String">
+        delete from projectthree where twoid = #{twoid}
+    </delete>
+
+    <insert id="addProjectthree" parameterType="com.myProject.model.projectthree">
+      INSERT INTO projectthree (twoid,threeid,filename,threef,input2,threename)
+                   VALUES (#{twoid},#{threeid},#{filename},#{threef},#{input2},#{threename})
+   </insert>
+    <insert id="addProjectthreelist"  useGeneratedKeys="true" parameterType="java.util.List">
+        insert into projectthree (twoid,threeid,filename,threef,input2,threename)
+        values
+        <foreach collection="list" item="item" index="index" separator="," close=";">
+            (#{item.twoid,jdbcType=VARCHAR},#{item.threeid,jdbcType=VARCHAR},#{item.filename,jdbcType=VARCHAR},#{item.threef,jdbcType=VARCHAR},#{item.input2,jdbcType=VARCHAR},#{item.threename,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+    <update id="updateProjectthree" parameterType="com.myProject.model.projectthree">
+        update projectthree
+        <set>
+            filename=#{filename},
+        </set>
+        where threeid=#{threeid}
+    </update>
+</mapper>
